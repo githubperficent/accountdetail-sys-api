@@ -1,0 +1,24 @@
+#%RAML 1.0 DataType
+type: object
+properties: 
+  accountID: string
+  accountType: 
+    enum: 
+      - Checking 
+      - Savings 
+      - Overdraft Savings 
+      - Credit Card
+  accountNumber: string
+  accountOwner: 
+    type: array
+    items: !include AccountOwner.raml
+  accountBalance: !include Money.raml
+  IBAN:
+    type: string
+  bank: !include Bank.raml
+  interestRate?:
+    type: number
+    format: double
+  createdAt: datetime
+  modifiedAt?: datetime
+example: !include ../examples/AccountExample.raml 

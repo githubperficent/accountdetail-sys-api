@@ -1,0 +1,40 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/91af19a4-1dc5-45c0-bd87-7646969a6f60/ # 
+title: account-example
+types:
+  customer: !include datatypes/Customer.raml
+  account: !include datatypes/Account.raml
+  accountowner: !include datatypes/AccountOwner.raml
+  bank: !include datatypes/Bank.raml
+  money: !include datatypes/Money.raml
+  address: !include datatypes/Address.raml
+  transaction: !include datatypes/Transaction.raml
+
+/account:
+  /{accountId}:
+    get:
+      
+      description: Account information
+      displayName: Customer Account
+      responses:
+        200:
+          body:
+            application/json:
+              examples: !include examples/AccountExample.raml
+        500:
+          body:
+            application/json:
+              example: Account internal server error
+    put:
+      description: Account information
+      displayName: Customer Account
+      responses:
+        200:
+          body:
+            application/json:
+              examples: !include examples/AccountExample.raml
+        500:
+          body:
+            application/json:
+              example: Account internal server error
+      
