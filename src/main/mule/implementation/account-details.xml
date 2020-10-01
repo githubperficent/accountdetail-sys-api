@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getAccountDetails" doc:id="d22a1c8c-284f-4e33-bb76-4e3810c85513" >
+		<ee:transform doc:name="Transform Message" doc:id="cf5ed21b-e6ba-4f4a-b028-516ba58bf01e" >
+			<ee:variables >
+				<ee:set-variable variableName="accountId" ><![CDATA[attributes.uriParams.'accountId']]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="57649a3f-1708-43c4-94e4-63ab0cb252ef" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  accountID: "12345",
+  accountType: "Savings",
+  accountNumber: "1234567890",
+  accountOwner: [
+    {
+      customerID: "8f19cb50-3f57-4d38",
+      displayName: "John Doe",
+      ssn: "123-456-7890"
+    }
+  ],
+  accountBalance: {
+    currency: "USD",
+    amount: "8457.90"
+  },
+  IBAN: "GB29NWBK60161331926820",
+  bank: {
+    bankCode: "NWBKGB2L",
+    bankName: "ACME Bank",
+    routingNumber: "432159876"
+  },
+  createdAt: "2012-03-07T00:00:00.001Z"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="updateAccountDetails" doc:id="af52d276-9558-41b3-bbf3-f918e31e30fa" >
+		<ee:transform doc:name="Transform Message" doc:id="0c5918bc-e1fb-4db0-aad7-5a58ffa53591" >
+			<ee:variables >
+				<ee:set-variable variableName="accountId" ><![CDATA[attributes.uriParams.'accountId']]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="65190938-5890-4fd0-ae2c-90a053596dc9" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  accountID: "12345",
+  accountType: "Savings",
+  accountNumber: "1234567890",
+  accountOwner: [
+    {
+      customerID: "8f19cb50-3f57-4d38",
+      displayName: "John Doe",
+      ssn: "123-456-7890"
+    }
+  ],
+  accountBalance: {
+    currency: "USD",
+    amount: "8457.90"
+  },
+  IBAN: "GB29NWBK60161331926820",
+  bank: {
+    bankCode: "NWBKGB2L",
+    bankName: "ACME Bank",
+    routingNumber: "432159876"
+  },
+  createdAt: "2012-03-07T00:00:00.001Z"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

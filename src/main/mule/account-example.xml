@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
-    <http:listener-config name="account-example-httpListenerConfig">
-        <http:listener-connection host="0.0.0.0" port="8081" />
-    </http:listener-config>
-    <apikit:config name="account-example-config" api="account-example.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
     <flow name="account-example-main">
         <http:listener config-ref="account-example-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -124,77 +120,9 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\account\(accountId):account-example-config">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="accountId">attributes.uriParams.'accountId'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  accountID: "12345",
-  accountType: "Savings",
-  accountNumber: "1234567890",
-  accountOwner: [
-    {
-      customerID: "8f19cb50-3f57-4d38",
-      displayName: "John Doe",
-      ssn: "123-456-7890"
-    }
-  ],
-  accountBalance: {
-    currency: "USD",
-    amount: "8457.90"
-  },
-  IBAN: "GB29NWBK60161331926820",
-  bank: {
-    bankCode: "NWBKGB2L",
-    bankName: "ACME Bank",
-    routingNumber: "432159876"
-  },
-  createdAt: "2012-03-07T00:00:00.001Z"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference" doc:id="d88c4d99-0ae9-4570-bcc8-d78c15fa97c7" name="updateAccountDetails"/>
     </flow>
-    <flow name="get:\account\(accountId):account-example-config">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="accountId">attributes.uriParams.'accountId'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  accountID: "12345",
-  accountType: "Savings",
-  accountNumber: "1234567890",
-  accountOwner: [
-    {
-      customerID: "8f19cb50-3f57-4d38",
-      displayName: "John Doe",
-      ssn: "123-456-7890"
-    }
-  ],
-  accountBalance: {
-    currency: "USD",
-    amount: "8457.90"
-  },
-  IBAN: "GB29NWBK60161331926820",
-  bank: {
-    bankCode: "NWBKGB2L",
-    bankName: "ACME Bank",
-    routingNumber: "432159876"
-  },
-  createdAt: "2012-03-07T00:00:00.001Z"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+	<flow name="get:\account\(accountId):account-example-config">
+		<flow-ref doc:name="Flow Reference" doc:id="25eb7773-c3a7-4a39-8ffe-4a976d09f869" name="getAccountDetails"/>
     </flow>
 </mule>
