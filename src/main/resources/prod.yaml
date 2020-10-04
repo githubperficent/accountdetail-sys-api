@@ -3,6 +3,6 @@ http:
   
 
 db:
-  user: "prouser"
+  user: "produser"
   host: "1561"
   
