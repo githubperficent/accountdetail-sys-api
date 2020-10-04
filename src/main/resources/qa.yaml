@@ -2,5 +2,5 @@ http:
   port: "8081"
   
 db:
-  user: "testinguser"
+  user: "qauser"
   host: "1561"
