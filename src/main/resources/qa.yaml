@@ -1,0 +1,6 @@
+http:
+  port: "8081"
+  
+db:
+  user: "qauser"
+  host: "1561"

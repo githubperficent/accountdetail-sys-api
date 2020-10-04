@@ -40,6 +40,7 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="a217f6c0-1292-4eee-a52e-cfd645959578" message="#[&quot;Deployment type :&quot;++ p('db.user')]"/>
 	</flow>
 	<flow name="updateAccountDetails" doc:id="af52d276-9558-41b3-bbf3-f918e31e30fa" >
 		<ee:transform doc:name="Transform Message" doc:id="0c5918bc-e1fb-4db0-aad7-5a58ffa53591" >
@@ -49,6 +50,7 @@ output application/json
 		</ee:transform>
 		<ee:transform doc:name="Transform Message" doc:id="65190938-5890-4fd0-ae2c-90a053596dc9" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
 			<ee:message >
+			
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
@@ -77,5 +79,6 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="ad71a11e-1e14-465d-a229-9c67c6566ee6" message="#[&quot;Deployment type :&quot;++ p('db.user')]"/>
 	</flow>
 </mule>
